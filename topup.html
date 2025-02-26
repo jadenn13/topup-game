@@ -682,4 +682,48 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 Toko Diamond. Hak Cipta Dil
+            <p>© 2025 Toko Diamond. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        function toggleSearch() {
+            const searchContainer = document.querySelector('.search-input-container');
+            searchContainer.classList.toggle('active');
+        }
+
+        function searchGame() {
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const games = [
+                { name: 'mobile legends', url: 'mobile-legends.html' },
+                { name: 'free fire', url: 'free-fire.html' },
+                { name: 'pubg mobile', url: 'pubg-mobile.html' },
+                { name: 'genshin impact', url: 'genshin-impact.html' },
+                { name: 'call of duty mobile', url: 'cod-mobile.html' },
+                { name: 'valorant', url: 'valorant.html' },
+                { name: 'fortnite', url: 'fortnite.html' },
+                { name: 'league of legends', url: 'league-of-legends.html' }
+            ];
+
+            const foundGame = games.find(game => game.name.includes(searchValue));
+            if (foundGame) {
+                window.location.href = foundGame.url;
+            } else {
+                alert('Game tidak ditemukan! Coba kata kunci lain.');
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchGame();
+            }
+        });
+    </script>
+</body>
+</html>
