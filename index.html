@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiamondShop - Game Currency Store</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            margin-right: 8px;
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            background: url('/api/placeholder/1200/600') center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-btn {
+            padding: 0.8rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #3a1c71, #d76d77);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Game Categories */
+        .categories {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #3a1c71, #d76d77);
+        }
+
+        .category-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .category-content {
+            padding: 1.5rem;
+        }
+
+        .category-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #3a1c71, #d76d77);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover {
+            background: linear-gradient(135deg, #4a2c81, #e77d87);
+            transform: translateY(-2px);
+        }
+
+        /* Featured Games */
+        .featured-games {
+            background-color: #f1f5f9;
+            padding: 4rem 2rem;
+        }
+
+        .games-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-img-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .game-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .game-card:hover .game-img {
+            transform: scale(1.1);
+        }
+
+        .game-content {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .game-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-price {
+            color: #d76d77;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .game-btn {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #3a1c71, #d76d77);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .game-btn:hover {
+            background: linear-gradient(135deg, #4a2c81, #e77d87);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            animation: slideIn 0.5s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #d76d77;
+        }
+
+        .game-details {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-modal-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 1rem;
+        }
+
+        .game-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .game-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .denomination-options {
+            margin-bottom: 1.5rem;
+        }
+
+        .denomination-title {
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .denomination-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+        }
+
+        .denomination-option {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .denomination-option:hover {
+            border-color: #d76d77;
+        }
+
+        .denomination-option.selected {
+            background-color: #f8e6e8;
+            border-color: #d76d77;
+        }
+
+        .denomination-amount {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .denomination-price {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+
+        .user-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #d76d77;
+            outline: none;
+        }
+
+        .payment-options {
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: #d76d77;
+        }
+
+        .payment-method.selected {
+            background-color: #f8e6e8;
+            border-color: #d76d77;
+        }
+
+        .payment-icon {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .payment-label {
+            font-weight: 500;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #3a1c71, #d76d77);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: linear-gradient(135deg, #4a2c81, #e77d87);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .footer-title:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(135deg, #3a1c71, #d76d77);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-link a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-link a:hover {
+            color: white;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .contact-icon {
+            margin-right: 0.8rem;
+            color: #d76d77;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .category-container,
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .modal-content {
+                width: 90%;
+                margin: 15% auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">💎</span>DiamondShop
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Games</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Top Up</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Vouchers</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Level Up Your Gaming Experience</h1>
+            <p class="hero-description">Get instant game diamonds, in-game currency and vouchers for your favorite games at the best prices.</p>
+            <button class="hero-btn">Top Up Now</button>
+        </div>
+    </section>
+
+    <!-- Game Categories -->
+    <section class="categories">
+        <h2 class="section-title fade-in">Game Categories</h2>
+        <div class="category-container">
+            <div class="category-card fade-in">
+                <img src="/api/placeholder/300/200" alt="Mobile Games" class="category-img">
+                <div class="category-content">
+                    <h3 class="category-title">Mobile Games</h3>
+                    <p class="category-description">Top up diamonds for popular mobile games</p>
+                    <button class="category-btn">View Games</button>
+                </div>
+            </div>
+            <div class="category-card fade-in">
+                <img src="/api/placeholder/300/200" alt="PC Games" class="category-img">
+                <div class="category-content">
+                    <h3 class="category-title">PC Games</h3>
+                    <p class="category-description">Get credits and items for PC gaming</p>
+                    <button class="category-btn">View Games</button>
+                </div>
+            </div>
+            <div class="category-card fade-in">
+                <img src="/api/placeholder/300/200" alt="Console Games" class="category-img">
+                <div class="category-content">
+                    <h3 class="category-title">Console Games</h3>
+                    <p class="category-description">PlayStation, Xbox and Nintendo points</p>
+                    <button class="category-btn">View Games</button>
+                </div>
+            </div>
+            <div class="category-card fade-in">
+                <img src="/api/placeholder/300/200" alt="Game Vouchers" class="category-img">
+                <div class="category-content">
+                    <h3 class="category-title">Game Vouchers</h3>
+                    <p class="category-description">Gift cards and membership codes</p>
+                    <button class="category-btn">View Vouchers</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Games -->
+    <section class="featured-games">
+        <h2 class="section-title fade-in">Top Games</h2>
+        <div class="games-grid">
+            <div class="game-card fade-in" onclick="openModal('Mobile Legends')">
+                <div class="game-img-container">
+                    <img src="/api/placeholder/200/120" alt="Mobile Legends" class="game-img">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Mobile Legends</h3>
+                    <p class="game-price">From $2.99</p>
+                    <button class="game-btn">Buy Diamonds</button>
+                </div>
+            </div>
+            <div class="game-card fade-in" onclick="openModal('Free Fire')">
+                <div class="game-img-container">
+                    <img src="/api/placeholder/200/120" alt="Free Fire" class="game-img">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Free Fire</h3>
+                    <p class="game-price">From $1.99</p>
+                    <button class="game-btn">Buy Diamonds</button>
+                </div>
+            </div>
+            <div class="game-card fade-in" onclick="openModal('PUBG Mobile')">
+                <div class="game-img-container">
+                    <img src="/api/placeholder/200/120" alt="PUBG Mobile" class="game-img">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">PUBG Mobile</h3>
+                    <p class="game-price">From $4.99</p>
+                    <button class="game-btn">Buy UC</button>
+                </div>
+            </div>
+            <div class="game-card fade-in" onclick="openModal('Genshin Impact')">
+                <div class="game-img-container">
+                    <img src="/api/placeholder/200/120" alt="Genshin Impact" class="game-img">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Genshin Impact</h3>
+                    <p class="game-price">From $5.99</p>
+                    <button class="game-btn">Buy Crystals</button>
+                </div>
+            </div>
+            <div class="game-card fade-in" onclick="openModal('Call of Duty Mobile')">
+                <div class="game-img-container">
+                    <img src="/api/placeholder/200/120" alt="Call of Duty Mobile" class="game-img">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Call of Duty Mobile</h3>
+                    <p class="game-price">From $3.99</p>
+                    <button class="game-btn">Buy CP</button>
+                </div>
+            </div>
+            <div class="game-card fade-in" onclick="openModal('Valorant')">
+                <div class="game-img-container">
+                    <img src="/api/placeholder/200/120" alt="Valorant" class="game-img">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Valorant</h3>
+                    <p class="game-price">From $9.99</p>
+                    <button class="game-btn">Buy Points</button>
+                </div>
+            </div>
+            <div class="game-card fade-in" onclick="openModal('Fortnite')">
+                <div class="game-img-container">
+                    <img src="/api/placeholder/200/120" alt="Fortnite" class="game-img">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Fortnite</h3>
+                    <p class="game-price">From $7.99</p>
+                    <button class="game-btn">Buy V-Bucks</button>
+                </div>
+            </div>
+            <div class="game-card fade-in" onclick="openModal('League of Legends')">
+                <div class="game-img-container">
+                    <img src="/api/placeholder/200/120" alt="League of Legends" class="game-img">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">League of Legends</h3>
+                    <p class="game-price">From $4.99</p>
+                    <button class="game-btn">Buy RP</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Game Title</h2>
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="game-details">
+                <img src="/api/placeholder/100/100" alt="Game" class="game-modal-img" id="modalImage">
+                <div class="game-info">
+                    <h3 id="modalGameTitle">Game Title</h3>
+                    <p>Select the diamond package you want to purchase.</p>
+                </div>
+            </div>
+            <div class="denomination-options">
+                <h3 class="denomination-title">Choose Diamond Package:</h3>
+                <div class="denomination-grid">
+                    <div class="denomination-option" onclick="selectDenomination(this)">
+                        <div class="denomination-amount">100 Diamonds</div>
+                        <div class="denomination-price">$2.99</div>
+                    </div>
+                    <div class="denomination-option" onclick="selectDenomination(this)">
+                        <div class="denomination-amount">300 Diamonds</div>
+                        <div class="denomination-price">$7.99</div>
+                    </div>
+                    <div class="denomination-option" onclick="selectDenomination(this)">
+                        <div class="denomination-amount">500 Diamonds</div>
+                        <div class="denomination-price">$12.99</div>
+                    </div>
+                    <div class="denomination-option" onclick="selectDenomination(this)">
+                        <div class="denomination-amount">1000 Diamonds</div>
+                        <div class="denomination-price">$24.99</div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-info">
+                <h3 class="denomination-title">Account Information:</h3>
+                <div class="form-group">
+                    <label class="form-label">User ID</label>
+                    <input type="text" class="form-input" placeholder="Enter your game user ID">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Server ID (if applicable)</label>
+                    <input type="text" class="form-input" placeholder="Enter your server ID">
+                </div>
+            </div>
+            <div class="payment-options">
+                <h3 class="denomination-title">Payment Method:</h3>
+                <div class="payment-method" onclick="selectPayment(this)">
+                    <div class="payment-icon">💳</div>
+                    <div class="payment-label">Credit/Debit Card</div>
+                </div>
+                <div class="payment-method" onclick="selectPayment(this)">
+                    <div class="payment-icon">📱</div>
+                    <div class="payment-label">Mobile Payment</div>
+                </div>
+                <div class="payment-method" onclick="selectPayment(this)">
+                    <div class="payment-icon">🏦</div>
+                    <div class="payment-label">Bank Transfer</div>
+                </div>
+                <div class="payment-method" onclick="selectPayment(this)">
+                    <div class="payment-icon">📲</div>
+                    <div class="payment-label">E-Wallet</div>
+                </div>
+            </div>
+            <button class="checkout-btn" onclick="processCheckout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">💎 DiamondShop</div>
+                <p class="footer-description">Your one-stop shop for game currencies, diamonds, and vouchers at the best prices. Fast, secure, and reliable.</p>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#">Home</a></li>
+                    <li class="footer-link"><a href="#">Games</a></li>
+                    <li class="footer-link"><a href="#">Top Up</a></li>
+                    <li class="footer-link"><a href="#">Vouchers</a></li>
+                    <li class="footer-link"><a href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Support</h3>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#">FAQ</a></li>
+                    <li class="footer-link"><a href="#">How to Top Up</a></li>
+                    <li class="footer-link"><a href="#">Contact Us</a></li>
+                    <li class="footer-link"><a href="#">Terms of Service</a></li>
+                    <li class="footer-link"><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Contact Us</h3>
+                <div class="footer-contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span><a href="mailto:support@diamondshop.com">support@diamondshop.com</a></span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="contact-icon">📱</span>
+                    <span>+62 123 456 7890</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 DiamondShop. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => observer.observe(element));
+
+        // Modal functionality
+        function openModal(gameTitle) {
+            const modal = document.getElementById('gameModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalGameTitle = document.getElementById('modalGameTitle');
+            modal.style.display = 'block';
+            modalTitle.textContent = gameTitle;
+            modalGameTitle.textContent = gameTitle;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('gameModal');
+            modal.style.display = 'none';
+            resetModalSelections();
+        }
+
+        function selectDenomination(element) {
+            document.querySelectorAll('.denomination-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function resetModalSelections() {
+            document.querySelectorAll('.denomination-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.classList.remove('selected');
+            });
+        }
+
+        function processCheckout() {
+            const selectedDenom = document.querySelector('.denomination-option.selected');
+            const selectedPayment = document.querySelector('.payment-method.selected');
+            const userId = document.querySelector('.form-input[placeholder="Enter your game user ID"]').value;
+            const serverId = document.querySelector('.form-input[placeholder="Enter your server ID"]').value;
+
+            if (!selectedDenom || !selectedPayment || !userId) {
+                alert('Please select a diamond package, payment method, and enter your User ID.');
+                return;
+            }
+
+            alert(`Processing checkout for ${document.getElementById('modalTitle').textContent}:\n` +
+                  `Package: ${selectedDenom.querySelector('.denomination-amount').textContent}\n` +
+                  `Price: ${selectedDenom.querySelector('.denomination-price').textContent}\n` +
+                  `User ID: ${userId}\n` +
+                  `Server ID: ${serverId || 'N/A'}\n` +
+                  `Payment: ${selectedPayment.querySelector('.payment-label').textContent}`);
+            closeModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('gameModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+</html>
