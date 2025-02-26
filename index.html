@@ -22,63 +22,110 @@
         /* Header Styles */
         header {
             background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
-            padding: 1.5rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
             position: sticky;
             top: 0;
             z-index: 100;
             animation: glow 2s infinite alternate;
+            border-bottom: 3px solid rgba(255, 175, 123, 0.7);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .logo {
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            font-weight: 800;
             color: #fff;
             text-decoration: none;
             display: flex;
             align-items: center;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 25px rgba(255, 111, 97, 0.7);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .logo-icon {
-            margin-right: 10px;
-            font-size: 2.5rem;
-            animation: spin 4s linear infinite;
+            margin-right: 12px;
+            font-size: 2.8rem;
+            animation: pulse 1.5s infinite;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
+            align-items: center;
             transition: all 0.3s ease;
         }
 
         .nav-item {
-            margin-left: 2rem;
+            margin-left: 2.5rem;
         }
 
         .nav-link {
             color: #fff;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            transition: all 0.4s ease;
             position: relative;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .nav-link:hover {
+            background: rgba(255, 111, 97, 0.9);
+            box-shadow: 0 0 20px rgba(255, 111, 97, 0.7);
+            transform: translateY(-3px);
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-left: 2rem;
+        }
+
+        .search-input {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 20px 0 0 20px;
+            font-size: 1rem;
+            outline: none;
             background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-            transform: scale(1.05);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(255, 111, 97, 0.5);
+        }
+
+        .search-btn {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 0 20px 20px 0;
+            background: #ff6f61;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #d76d77;
+            box-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
         }
 
         .hamburger {
@@ -88,11 +135,16 @@
             background: none;
             border: none;
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger:hover {
+            transform: rotate(90deg);
         }
 
         /* Hero Section */
         .hero {
-            height: 70vh;
+            height: 80vh;
             background: url('https://images.unsplash.com/photo-1542751371-adc38448a05e') center/cover no-repeat;
             position: relative;
             display: flex;
@@ -116,23 +168,31 @@
             position: relative;
             z-index: 1;
             text-align: center;
-            max-width: 900px;
-            padding: 2rem;
+            max-width: 1000px;
+            padding: 3rem;
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            color: #fff;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+            font-size: 4rem;
+            color: #ffaf7b;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 25px rgba(255, 175, 123, 0.9);
             animation: fadeInUp 1s ease;
         }
 
-        .hero-description {
-            font-size: 1.3rem;
+        .hero-tagline {
+            font-size: 1.5rem;
             color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease 0.4s both;
         }
 
         .hero-btn {
@@ -152,6 +212,24 @@
         .hero-btn:hover {
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 0 30px rgba(255, 111, 97, 1);
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .hero-icon {
+            font-size: 2rem;
+            color: #ff6f61;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-icon:hover {
+            transform: scale(1.2);
         }
 
         /* Kategori Game */
@@ -376,9 +454,10 @@
             to { box-shadow: 0 0 20px rgba(255, 111, 97, 0.8); }
         }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         /* Responsivitas */
@@ -404,16 +483,30 @@
                 text-align: center;
             }
 
+            .search-container {
+                margin: 1rem 0;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .search-input {
+                width: 70%;
+            }
+
             .hamburger {
                 display: block;
             }
 
             .hero {
-                height: 50vh;
+                height: 60vh;
             }
 
             .hero-title {
-                font-size: 2rem;
+                font-size: 2.5rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.2rem;
             }
 
             .hero-description {
@@ -423,6 +516,14 @@
             .hero-btn {
                 padding: 0.8rem 2rem;
                 font-size: 1rem;
+            }
+
+            .hero-icons {
+                gap: 1.5rem;
+            }
+
+            .hero-icon {
+                font-size: 1.5rem;
             }
 
             .category-container,
@@ -458,15 +559,19 @@
 
         @media (max-width: 480px) {
             .logo {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
 
             .logo-icon {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .hero-title {
-                font-size: 1.5rem;
+                font-size: 2rem;
+            }
+
+            .hero-tagline {
+                font-size: 1rem;
             }
 
             .hero-description {
@@ -498,6 +603,10 @@
                 <li class="nav-item"><a href="topup.html" class="nav-link">Isi Ulang</a></li>
                 <li class="nav-item"><a href="vouchers.html" class="nav-link">Voucher</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Kontak</a></li>
+                <li class="search-container">
+                    <input type="text" class="search-input" placeholder="Cari game..." id="searchInput">
+                    <button class="search-btn" onclick="searchGame()">Cari</button>
+                </li>
             </ul>
         </div>
     </header>
@@ -506,8 +615,18 @@
     <section class="hero">
         <div class="hero-content">
             <h1 class="hero-title">Tingkatkan Pengalaman Bermainmu!</h1>
-            <p class="hero-description">Dapatkan diamond, mata uang dalam game, dan voucher untuk game favoritmu dengan harga terbaik.</p>
+            <p class="hero-tagline">Jelajahi dunia game dengan diamond dan voucher terbaik</p>
+            <p class="hero-description">
+                Toko Diamond menyediakan solusi cepat dan aman untuk semua kebutuhan gamingmu. 
+                Dari diamond Mobile Legends hingga V-Bucks Fortnite, kami punya semuanya dengan harga terbaik dan layanan 24/7. 
+                Bergabunglah dengan ribuan gamer yang mempercayai kami!
+            </p>
             <a href="topup.html" class="hero-btn">Isi Ulang Sekarang</a>
+            <div class="hero-icons">
+                <span class="hero-icon">🎮</span>
+                <span class="hero-icon">💰</span>
+                <span class="hero-icon">🎁</span>
+            </div>
         </div>
     </section>
 
@@ -561,7 +680,7 @@
                 <img src="https://cdn1.dotesports.com/wp-content/uploads/2020/08/12124222/free-fire.jpg" alt="Free Fire" class="game-img">
                 <div class="game-content">
                     <h3 class="game-title">Free Fire</h3>
-                    <p class="game-price">Mulai dari $1.99</p>
+                    <p class="game-price">Mulai dari $2.99</p>
                 </div>
             </a>
             <a href="pubg-mobile.html" class="game-card">
@@ -653,12 +772,42 @@
         </div>
     </footer>
 
-    <!-- JavaScript untuk Hamburger Menu -->
+    <!-- JavaScript -->
     <script>
+        // Hamburger Menu
         function toggleMenu() {
             const navMenu = document.querySelector('.nav-menu');
             navMenu.classList.toggle('active');
         }
+
+        // Fungsi Pencarian
+        function searchGame() {
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const games = [
+                { name: 'mobile legends', url: 'mobile-legends.html' },
+                { name: 'free fire', url: 'free-fire.html' },
+                { name: 'pubg mobile', url: 'pubg-mobile.html' },
+                { name: 'genshin impact', url: 'genshin-impact.html' },
+                { name: 'call of duty mobile', url: 'cod-mobile.html' },
+                { name: 'valorant', url: 'valorant.html' },
+                { name: 'fortnite', url: 'fortnite.html' },
+                { name: 'league of legends', url: 'league-of-legends.html' }
+            ];
+
+            const foundGame = games.find(game => game.name.includes(searchValue));
+            if (foundGame) {
+                window.location.href = foundGame.url;
+            } else {
+                alert('Game tidak ditemukan! Coba kata kunci lain.');
+            }
+        }
+
+        // Aktifkan pencarian dengan tombol Enter
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchGame();
+            }
+        });
     </script>
 </body>
 </html>
