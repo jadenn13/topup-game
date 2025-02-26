@@ -172,12 +172,23 @@
             padding: 5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .game-icon {
+            width: 100px;
+            height: auto;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
         }
 
         .section-title {
             font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
             color: #ffaf7b;
             text-shadow: 0 0 10px rgba(255, 175, 123, 0.7);
             position: relative;
@@ -350,6 +361,103 @@
             border-right-color: transparent;
         }
 
+        /* Modal Konfirmasi */
+        .modal-content {
+            background: linear-gradient(135deg, #2a2a42, #1e1e36);
+            color: #e0e0e0;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(255, 111, 97, 0.5);
+            overflow: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #ff6f61, #d76d77);
+            border-bottom: none;
+            padding: 1.5rem;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #fff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+        }
+
+        .btn-close {
+            filter: invert(1);
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-close:hover {
+            opacity: 1;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.1rem;
+        }
+
+        .modal-table td {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 111, 97, 0.2);
+        }
+
+        .modal-table td:first-child {
+            color: #ffaf7b;
+            font-weight: 600;
+            width: 40%;
+        }
+
+        .modal-table td:nth-child(2) {
+            width: 10%;
+            color: #fff;
+        }
+
+        .modal-table td:last-child {
+            color: #e0e0e0;
+        }
+
+        .modal-footer {
+            border-top: none;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            background: rgba(255, 111, 97, 0.1);
+        }
+
+        .modal-footer .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .modal-footer .btn-secondary {
+            background: #2a2a42;
+            color: #fff;
+            border: none;
+        }
+
+        .modal-footer .btn-secondary:hover {
+            background: #3a3a52;
+            transform: scale(1.05);
+        }
+
+        .modal-footer .btn-confirm {
+            background: linear-gradient(135deg, #ff6f61, #d76d77);
+            border: none;
+            width: auto;
+        }
+
         /* Media Query untuk Mobile */
         @media (max-width: 768px) {
             header {
@@ -447,6 +555,10 @@
                 padding: 3rem 1rem;
             }
 
+            .game-icon {
+                width: 80px;
+            }
+
             .section-title {
                 font-size: 2rem;
             }
@@ -471,6 +583,10 @@
             .payment-tab button {
                 font-size: 1rem;
                 padding: 0.5rem;
+            }
+
+            .modal-table {
+                font-size: 1rem;
             }
         }
 
@@ -509,6 +625,10 @@
 
             .diamond-grid {
                 grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+
+            .game-icon {
+                width: 60px;
             }
         }
 
@@ -552,7 +672,10 @@
 
     <!-- Konten Game -->
     <section class="game-section">
-        <h2 class="section-title">Mobile Legends Top Up</h2>
+        <div class="game-header">
+            <img src="https://static-src.vocagame.com/vocagame/mobilelegends-4702-original.webp" alt="Mobile Legends Icon" class="game-icon">
+            <h2 class="section-title">Mobile Legends Top Up</h2>
+        </div>
 
         <!-- Input Player ID dan Zone ID -->
         <div class="form-group">
@@ -647,17 +770,17 @@
     <!-- Modal Konfirmasi -->
     <div class="modal fade" id="confrimModal" tabindex="-1" aria-labelledby="confrimModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content" style="background: #2a2a42; color: #fff; border-radius: 15px;">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="confrimModalLabel">Konfirmasi Pesanan</h5>
-                    <button type="button" class="btn-close" style="filter: invert(1);" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table style="width: 100%; color: #e0e0e0;">
-                        <tr><td>User ID (Zone ID)</td><td>: </td><td id="info2"></td></tr>
-                        <tr><td>Nominal</td><td>: </td><td id="info4"></td></tr>
-                        <tr><td>Harga</td><td>: </td><td id="info5"></td></tr>
-                        <tr><td>Pembayaran</td><td>: </td><td id="info6"></td></tr>
+                    <table class="modal-table">
+                        <tr><td>User ID (Zone ID)</td><td>:</td><td id="info2"></td></tr>
+                        <tr><td>Nominal</td><td>:</td><td id="info4"></td></tr>
+                        <tr><td>Harga</td><td>:</td><td id="info5"></td></tr>
+                        <tr><td>Pembayaran</td><td>:</td><td id="info6"></td></tr>
                     </table>
                 </div>
                 <div class="modal-footer">
