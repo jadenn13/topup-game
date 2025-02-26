@@ -486,7 +486,23 @@
         }
 
         /* Responsivitas */
-@media (max-width: 768px) {
+.category-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .games-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        /* ... Bagian CSS lainnya hingga @media ... */
+
+        @media (max-width: 768px) {
             header {
                 padding: 0.8rem 1rem;
             }
@@ -495,29 +511,29 @@
                 display: flex;
                 justify-content: space-between; /* Logo di kiri, search dan hamburger di kanan */
                 align-items: center;
-                gap: 0.5rem; /* Jarak antar elemen normal */
+                gap: 0.5rem;
             }
 
             .logo {
                 font-size: 1.5rem;
-                margin-right: 0; /* Tidak ada margin kanan ekstra, tetap di kiri */
-                order: 1; /* Logo di urutan pertama (kiri) */
+                margin-right: 0; /* Logo tetap di kiri */
+                order: 1;
             }
 
             .logo-icon {
                 font-size: 1.8rem;
-                margin-right: 10px; /* Jarak ikon ke teks tetap seperti awal */
+                margin-right: 10px;
             }
 
             .search-container {
-                order: 2; /* Search sebelum hamburger */
-                margin-right: 0.2rem; /* Jarak kecil ke hamburger */
-                margin-left: auto; /* Menggeser search ke kanan */
+                order: 2;
+                margin-right: 0.2rem; /* Search dekat hamburger */
+                margin-left: auto; /* Geser ke kanan */
             }
 
             .search-toggle {
                 font-size: 1.3rem;
-                padding: 0; /* Menghilangkan padding tambahan */
+                padding: 0;
             }
 
             .search-input-container {
@@ -536,9 +552,9 @@
             .hamburger {
                 display: block;
                 font-size: 1.6rem;
-                margin-left: 0.2rem; /* Jarak kecil dari search */
-                order: 3; /* Hamburger di paling kanan */
-                padding: 0; /* Menghilangkan padding tambahan */
+                margin-left: 0.2rem; /* Dekat dengan search */
+                order: 3;
+                padding: 0;
             }
 
             .nav-menu {
@@ -596,22 +612,44 @@
             .nav-item:nth-child(4) { transition-delay: 0.4s; }
             .nav-item:nth-child(5) { transition-delay: 0.5s; }
 
+            /* Perbaikan grid untuk mobile */
+            .category-container,
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Kembali ke tata letak awal */
+                gap: 1.5rem;
+            }
+
+            .category-img,
+            .game-img {
+                height: 120px;
+            }
+
+            .category-title,
+            .game-title {
+                font-size: 1.1rem;
+            }
+
+            .category-description,
+            .game-price {
+                font-size: 0.9rem;
+            }
+
             /* ... Bagian responsif lainnya tetap sama ... */
         }
 
         @media (max-width: 480px) {
             .logo {
                 font-size: 1.3rem;
-                margin-right: 0; /* Tetap di kiri tanpa jarak kanan */
+                margin-right: 0;
             }
 
             .logo-icon {
                 font-size: 1.5rem;
-                margin-right: 8px; /* Sedikit dikurangi untuk kekompakan */
+                margin-right: 8px;
             }
 
             .search-container {
-                margin-right: 0.1rem; /* Lebih dekat ke hamburger */
+                margin-right: 0.1rem;
             }
 
             .search-toggle {
@@ -620,7 +658,14 @@
 
             .hamburger {
                 font-size: 1.5rem;
-                margin-left: 0.1rem; /* Lebih dekat ke search */
+                margin-left: 0.1rem;
+            }
+
+            /* Grid tetap seperti awal */
+            .category-container,
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1.5rem;
             }
             
             .hero-title {
