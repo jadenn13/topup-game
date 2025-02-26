@@ -68,7 +68,7 @@
         }
 
         .nav-item {
-            margin-left: 2rem;
+            margin-left: 1.5rem;
         }
 
         .nav-link {
@@ -79,19 +79,19 @@
             padding: 0.5rem 1rem;
             border-radius: 25px;
             transition: all 0.4s ease;
-            background: rgba(255, 255, 255, 0.1);
         }
 
         .nav-link:hover {
-            background: rgba(255, 111, 97, 0.9);
-            box-shadow: 0 0 20px rgba(255, 111, 97, 0.7);
-            transform: translateY(-3px);
+            color: #ffaf7b; /* Warna lebih menyatu dengan header */
+            background: rgba(255, 255, 255, 0.15); /* Latar belakang lebih halus */
+            box-shadow: 0 0 15px rgba(255, 175, 123, 0.5);
+            transform: translateY(-2px);
         }
 
         .search-container {
             display: flex;
             align-items: center;
-            margin-left: 2rem;
+            margin: 0 1.5rem;
         }
 
         .search-input {
@@ -103,11 +103,13 @@
             background: rgba(255, 255, 255, 0.2);
             color: #fff;
             transition: all 0.3s ease;
+            width: 150px;
         }
 
         .search-input:focus {
             background: rgba(255, 255, 255, 0.3);
             box-shadow: 0 0 10px rgba(255, 111, 97, 0.5);
+            width: 200px;
         }
 
         .search-btn {
@@ -204,7 +206,7 @@
             box-shadow: 0 0 30px rgba(255, 111, 97, 1);
         }
 
-        /* Kata-kata Elegan di Bawah */
+        /* Kata-kata Elegan */
         .elegant-text {
             padding: 3rem 2rem;
             text-align: center;
@@ -455,6 +457,10 @@
                 padding: 0.8rem 1rem;
             }
 
+            .nav-container {
+                flex-wrap: wrap;
+            }
+
             .logo {
                 font-size: 1.5rem;
             }
@@ -488,13 +494,13 @@
             }
 
             .search-container {
-                margin: 1.5rem 0;
+                margin: 0.5rem 0;
                 width: 100%;
                 justify-content: center;
             }
 
             .search-input {
-                width: 70%;
+                width: 60%;
             }
 
             .hamburger {
@@ -563,6 +569,10 @@
                 font-size: 1.5rem;
             }
 
+            .search-input {
+                width: 50%;
+            }
+
             .hero-title {
                 font-size: 1.8rem;
             }
@@ -593,6 +603,10 @@
             <a href="index.html" class="logo">
                 <span class="logo-icon">💎</span>Toko Diamond
             </a>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Cari game..." id="searchInput">
+                <button class="search-btn" onclick="searchGame()">Cari</button>
+            </div>
             <button class="hamburger" onclick="toggleMenu()">☰</button>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="index.html" class="nav-link">Beranda</a></li>
@@ -600,10 +614,6 @@
                 <li class="nav-item"><a href="topup.html" class="nav-link">Isi Ulang</a></li>
                 <li class="nav-item"><a href="vouchers.html" class="nav-link">Voucher</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Kontak</a></li>
-                <li class="search-container">
-                    <input type="text" class="search-input" placeholder="Cari game..." id="searchInput">
-                    <button class="search-btn" onclick="searchGame()">Cari</button>
-                </li>
             </ul>
         </div>
     </header>
