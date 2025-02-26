@@ -223,14 +223,14 @@
             box-shadow: 0 0 10px rgba(255, 111, 97, 0.5);
         }
 
-        .diamond-grid {
+        .diamond-grid, .membership-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
-        .diamond-card {
+        .diamond-card, .membership-card {
             background: #2a2a42;
             padding: 1rem;
             border-radius: 15px;
@@ -239,22 +239,22 @@
             transition: all 0.4s ease;
         }
 
-        .diamond-card:hover {
+        .diamond-card:hover, .membership-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 0 30px rgba(255, 111, 97, 0.8);
         }
 
-        .diamond-card.active {
+        .diamond-card.active, .membership-card.active {
             background: rgba(255, 111, 97, 0.3);
         }
 
-        .diamond-title {
+        .diamond-title, .membership-title {
             font-size: 1.2rem;
             color: #fff;
             margin-bottom: 0.5rem;
         }
 
-        .diamond-price {
+        .diamond-price, .membership-price {
             font-size: 1rem;
             color: #ff6f61;
             font-weight: 700;
@@ -451,16 +451,16 @@
                 font-size: 2rem;
             }
 
-            .diamond-grid {
+            .diamond-grid, .membership-grid {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
                 gap: 1rem;
             }
 
-            .diamond-title {
+            .diamond-title, .membership-title {
                 font-size: 1rem;
             }
 
-            .diamond-price {
+            .diamond-price, .membership-price {
                 font-size: 0.9rem;
             }
 
@@ -507,7 +507,7 @@
                 padding: 0.5rem;
             }
 
-            .diamond-grid {
+            .diamond-grid, .membership-grid {
                 grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             }
         }
@@ -561,9 +561,9 @@
             <small style="color: #b0b0b0; font-size: 0.8rem;">Untuk mengetahui User ID Anda, silakan klik menu profile di bagian kiri atas pada menu utama game.</small>
         </div>
 
-        <!-- Pilih Nominal Top Up -->
+        <!-- Pilih Nominal Diamond -->
         <div class="form-group">
-            <label class="form-label">Pilih Nominal Top Up</label>
+            <label class="form-label">Pilih Nominal Diamond</label>
             <div class="diamond-grid">
                 <div class="diamond-card" data-price="1000" data-name="5 Diamonds">
                     <h3 class="diamond-title">5 Diamonds</h3>
@@ -573,15 +573,22 @@
                     <h3 class="diamond-title">12 Diamonds</h3>
                     <p class="diamond-price">Rp 3.000</p>
                 </div>
-                <div class="diamond-card" data-price="28000" data-name="Member Mingguan">
-                    <h3 class="diamond-title">Member Mingguan</h3>
-                    <p class="diamond-price">Rp 28.000</p>
+                <!-- Tambahkan lebih banyak opsi diamond sesuai kebutuhan -->
+            </div>
+        </div>
+
+        <!-- Pilih Nominal Membership -->
+        <div class="form-group">
+            <label class="form-label">Pilih Nominal Membership</label>
+            <div class="membership-grid">
+                <div class="membership-card" data-price="28000" data-name="Member Mingguan">
+                    <h3 class="membership-title">Member Mingguan</h3>
+                    <p class="membership-price">Rp 28.000</p>
                 </div>
-                <div class="diamond-card" data-price="85000" data-name="Member Bulanan">
-                    <h3 class="diamond-title">Member Bulanan</h3>
-                    <p class="diamond-price">Rp 85.000</p>
+                <div class="membership-card" data-price="85000" data-name="Member Bulanan">
+                    <h3 class="membership-title">Member Bulanan</h3>
+                    <p class="membership-price">Rp 85.000</p>
                 </div>
-                <!-- Tambahkan lebih banyak opsi sesuai kebutuhan -->
             </div>
         </div>
 
@@ -637,7 +644,7 @@
         </button>
     </section>
 
-    <!-- Modal Konfirmasi (contoh sederhana) -->
+    <!-- Modal Konfirmasi -->
     <div class="modal fade" id="confrimModal" tabindex="-1" aria-labelledby="confrimModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" style="background: #2a2a42; color: #fff; border-radius: 15px;">
@@ -695,9 +702,9 @@
         });
 
         // Logika untuk Pilih Nominal dan Pembayaran
-        document.querySelectorAll('.diamond-card').forEach(item => {
+        document.querySelectorAll('.diamond-card, .membership-card').forEach(item => {
             item.addEventListener('click', function() {
-                document.querySelectorAll('.diamond-card').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.diamond-card, .membership-card').forEach(el => el.classList.remove('active'));
                 this.classList.add('active');
             });
         });
@@ -713,7 +720,7 @@
 
         document.querySelectorAll('.payment-card').forEach(item => {
             item.addEventListener('click', function() {
-                if (document.querySelector('.diamond-card.active')) {
+                if (document.querySelector('.diamond-card.active, .membership-card.active')) {
                     document.querySelectorAll('.payment-card').forEach(el => el.classList.remove('active'));
                     this.classList.add('active');
                 }
@@ -721,13 +728,13 @@
         });
 
         document.getElementById('confirm').addEventListener('click', function() {
-            if (document.querySelector('.diamond-card.active') && document.querySelector('.payment-card.active') && 
-                document.getElementById('userId').value) {
+            const selectedItem = document.querySelector('.diamond-card.active') || document.querySelector('.membership-card.active');
+            if (selectedItem && document.querySelector('.payment-card.active') && document.getElementById('userId').value) {
                 document.getElementById('loading').style.display = 'block';
                 setTimeout(() => {
                     document.getElementById('info2').textContent = document.getElementById('userId').value;
-                    document.getElementById('info4').textContent = document.querySelector('.diamond-card.active').getAttribute('data-name');
-                    document.getElementById('info5').textContent = `Rp ${parseInt(document.querySelector('.diamond-card.active').getAttribute('data-price')).toLocaleString('id-ID')}`;
+                    document.getElementById('info4').textContent = selectedItem.getAttribute('data-name');
+                    document.getElementById('info5').textContent = `Rp ${parseInt(selectedItem.getAttribute('data-price')).toLocaleString('id-ID')}`;
                     document.getElementById('info6').textContent = document.querySelector('.payment-card.active').getAttribute('data-name');
                     document.getElementById('loading').style.display = 'none';
                     new bootstrap.Modal(document.getElementById('confrimModal')).show();
