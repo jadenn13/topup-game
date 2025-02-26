@@ -57,6 +57,7 @@
         .nav-menu {
             display: flex;
             list-style: none;
+            transition: all 0.3s ease;
         }
 
         .nav-item {
@@ -78,6 +79,15 @@
             background: rgba(255, 255, 255, 0.2);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
             transform: scale(1.05);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 2rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
 
         /* Hero Section */
@@ -136,6 +146,7 @@
             cursor: pointer;
             transition: all 0.4s ease;
             box-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
+            text-decoration: none;
         }
 
         .hero-btn:hover {
@@ -183,7 +194,7 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             transition: all 0.4s ease;
             cursor: pointer;
-            position: relative;
+            text-decoration: none;
         }
 
         .category-card:hover {
@@ -241,6 +252,7 @@
             cursor: pointer;
             display: flex;
             flex-direction: column;
+            text-decoration: none;
         }
 
         .game-card:hover {
@@ -368,6 +380,108 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+
+        /* Responsivitas */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #3a1c71, #d76d77);
+                padding: 1rem;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-item {
+                margin: 1rem 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero {
+                height: 50vh;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .hero-btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .category-container,
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .category-img,
+            .game-img {
+                height: 120px;
+            }
+
+            .category-title,
+            .game-title {
+                font-size: 1.1rem;
+            }
+
+            .category-description,
+            .game-price {
+                font-size: 0.9rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-contact-item {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .logo-icon {
+                font-size: 2rem;
+            }
+
+            .hero-title {
+                font-size: 1.5rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+            }
+
+            .hero-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -377,6 +491,7 @@
             <a href="index.html" class="logo">
                 <span class="logo-icon">💎</span>Toko Diamond
             </a>
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="index.html" class="nav-link">Beranda</a></li>
                 <li class="nav-item"><a href="games.html" class="nav-link">Game</a></li>
@@ -392,7 +507,7 @@
         <div class="hero-content">
             <h1 class="hero-title">Tingkatkan Pengalaman Bermainmu!</h1>
             <p class="hero-description">Dapatkan diamond, mata uang dalam game, dan voucher untuk game favoritmu dengan harga terbaik.</p>
-            <a href="topup.html"><button class="hero-btn">Isi Ulang Sekarang</button></a>
+            <a href="topup.html" class="hero-btn">Isi Ulang Sekarang</a>
         </div>
     </section>
 
@@ -537,5 +652,13 @@
             <p>© 2025 Toko Diamond. Hak Cipta Dilindungi.</p>
         </div>
     </footer>
+
+    <!-- JavaScript untuk Hamburger Menu -->
+    <script>
+        function toggleMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
