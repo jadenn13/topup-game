@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semua Game - Toko Diamond</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+            padding: 1rem 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: glow 2s infinite alternate;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s ease;
+            margin-right: 0.5rem;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-right: 0.5rem;
+        }
+
+        .search-toggle {
+            font-size: 1.5rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .search-toggle:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        .search-input-container {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .search-input-container.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .search-input {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px 0 0 20px;
+            font-size: 1rem;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            width: 150px;
+        }
+
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(255, 111, 97, 0.5);
+        }
+
+        .search-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0 20px 20px 0;
+            background: #ff6f61;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #d76d77;
+            box-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
+        }
+
+        .hamburger {
+            font-size: 1.8rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            transition: transform 0.5s ease;
+        }
+
+        .nav-item {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.4s ease;
+            display: block;
+        }
+
+        .nav-link:hover {
+            color: #ffaf7b;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(255, 175, 123, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            height: 50vh;
+            background: url('https://images.unsplash.com/photo-1542751371-adc38448a05e') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            animation: fadeIn 2s ease;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            color: #ffaf7b;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 175, 123, 0.9);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .content-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ffaf7b;
+            text-shadow: 0 0 10px rgba(255, 175, 123, 0.7);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6f61, #d76d77);
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .game-card {
+            background: #2a2a42;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(255, 111, 97, 0.8);
+        }
+
+        .game-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .game-card:hover .game-img {
+            transform: scale(1.1);
+        }
+
+        .game-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-price {
+            font-size: 1.1rem;
+            color: #ff6f61;
+            font-weight: 700;
+        }
+
+        footer {
+            background: #1e1e36;
+            color: #e0e0e0;
+            padding: 4rem 2rem;
+            border-top: 3px solid #ff6f61;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-description {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #ffaf7b;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link a {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        .footer-link a:hover {
+            color: #ff6f61;
+            text-shadow: 0 0 10px rgba(255, 111, 97, 0.7);
+            transform: translateX(5px);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            margin-right: 1rem;
+            color: #ff6f61;
+            font-size: 1.2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 111, 97, 0.2);
+            color: #b0b0b0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(255, 111, 97, 0.5); }
+            to { box-shadow: 0 0 20px rgba(255, 111, 97, 0.8); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-container {
+                gap: 0.5rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+                margin-right: 0.3rem;
+            }
+
+            .logo-icon {
+                font-size: 1.8rem;
+            }
+
+            .search-toggle {
+                font-size: 1.3rem;
+                margin-right: 0.3rem;
+            }
+
+            .search-input-container {
+                position: fixed;
+                top: 60px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80%;
+                max-width: 300px;
+            }
+
+            .search-input {
+                width: 70%;
+            }
+
+            .hamburger {
+                display: block;
+                font-size: 1.6rem;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 250px;
+                height: 100%;
+                background: linear-gradient(135deg, #3a1c71, #d76d77);
+                padding: 4rem 1rem 2rem;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+                transform: translateX(-100%);
+            }
+
+            .nav-menu.active {
+                display: flex;
+                animation: slideIn 0.5s ease forwards;
+            }
+
+            .nav-menu:before {
+                content: "💎 Toko Diamond";
+                position: absolute;
+                top: 1rem;
+                left: 1rem;
+                color: #ffaf7b;
+                font-size: 1.5rem;
+                font-weight: 700;
+                text-shadow: 0 0 10px rgba(255, 175, 123, 0.5);
+                display: flex;
+                align-items: center;
+            }
+
+            .nav-item {
+                margin: 1rem 0;
+                text-align: center;
+                opacity: 0;
+                transform: translateX(-20px);
+                transition: all 0.3s ease;
+                background: rgba(255, 255, 255, 0.1);
+                padding: 0.8rem;
+                border-radius: 10px;
+                box-shadow: inset 0 0 10px rgba(255, 111, 97, 0.3);
+            }
+
+            .nav-menu.active .nav-item {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .nav-item:nth-child(1) { transition-delay: 0.1s; }
+            .nav-item:nth-child(2) { transition-delay: 0.2s; }
+            .nav-item:nth-child(3) { transition-delay: 0.3s; }
+            .nav-item:nth-child(4) { transition-delay: 0.4s; }
+            .nav-item:nth-child(5) { transition-delay: 0.5s; }
+
+            .hero {
+                height: 40vh;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .content-section {
+                padding: 3rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .game-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .game-card {
+                padding: 1rem;
+            }
+
+            .game-title {
+                font-size: 1.2rem;
+            }
+
+            .game-price {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .logo-icon {
+                font-size: 1.5rem;
+            }
+
+            .search-toggle {
+                font-size: 1.2rem;
+            }
+
+            .search-input {
+                width: 60%;
+            }
+
+            .hamburger {
+                font-size: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">💎</span>Toko Diamond
+            </a>
+            <div class="search-container">
+                <button class="search-toggle" onclick="toggleSearch()">🔍</button>
+                <div class="search-input-container">
+                    <input type="text" class="search-input" placeholder="Cari game..." id="searchInput">
+                    <button class="search-btn" onclick="searchGame()">Cari</button>
+                </div>
+            </div>
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Beranda</a></li>
+                <li class="nav-item"><a href="games.html" class="nav-link">Game</a></li>
+                <li class="nav-item"><a href="topup.html" class="nav-link">Isi Ulang</a></li>
+                <li class="nav-item"><a href="vouchers.html" class="nav-link">Voucher</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Kontak</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Semua Game</h1>
+            <p class="hero-description">Jelajahi semua game yang tersedia di Toko Diamond!</p>
+        </div>
+    </section>
+
+    <!-- Konten Utama -->
+    <section class="content-section">
+        <h2 class="section-title">Daftar Game Populer</h2>
+        <div class="game-grid">
+            <a href="mobile-legends.html" class="game-card">
+                <img src="https://cdn.mos.cms.futurecdn.net/6rknHngNeKxV83hQuKbvKk-320-80.jpg" alt="Mobile Legends" class="game-img">
+                <div class="game-content">
+                    <h3 class="game-title">Mobile Legends</h3>
+                    <p class="game-price">Mulai dari $2.99</p>
+                </div>
+            </a>
+            <a href="free-fire.html" class="game-card">
+                <img src="https://cdn1.dotesports.com/wp-content/uploads/2020/08/12124222/free-fire.jpg" alt="Free Fire" class="game-img">
+                <div class="game-content">
+                    <h3 class="game-title">Free Fire</h3>
+                    <p class="game-price">Mulai dari $2.99</p>
+                </div>
+            </a>
+            <a href="pubg-mobile.html" class="game-card">
+                <img src="https://cdn.mos.cms.futurecdn.net/WW7wXvR8XEmzPUW8YDnJPb-320-80.jpg" alt="PUBG Mobile" class="game-img">
+                <div class="game-content">
+                    <h3 class="game-title">PUBG Mobile</h3>
+                    <p class="game-price">Mulai dari $4.99</p>
+                </div>
+            </a>
+            <a href="genshin-impact.html" class="game-card">
+                <img src="https://cdn.mos.cms.futurecdn.net/8ZVF6gQvYvJ7Q8X8Y8X8Y8-320-80.jpg" alt="Genshin Impact" class="game-img">
+                <div class="game-content">
+                    <h3 class="game-title">Genshin Impact</h3>
+                    <p class="game-price">Mulai dari $5.99</p>
+                </div>
+            </a>
+            <a href="cod-mobile.html" class="game-card">
+                <img src="https://cdn.mos.cms.futurecdn.net/6Q8X8X8X8X8X8X8X8X8X8X-320-80.jpg" alt="Call of Duty Mobile" class="game-img">
+                <div class="game-content">
+                    <h3 class="game-title">Call of Duty Mobile</h3>
+                    <p class="game-price">Mulai dari $3.99</p>
+                </div>
+            </a>
+            <a href="valorant.html" class="game-card">
+                <img src="https://cdn.mos.cms.futurecdn.net/7Y7Y7Y7Y7Y7Y7Y7Y7Y7Y7Y-320-80.jpg" alt="Valorant" class="game-img">
+                <div class="game-content">
+                    <h3 class="game-title">Valorant</h3>
+                    <p class="game-price">Mulai dari $9.99</p>
+                </div>
+            </a>
+            <a href="fortnite.html" class="game-card">
+                <img src="https://cdn.mos.cms.futurecdn.net/9Z9Z9Z9Z9Z9Z9Z9Z9Z9Z9Z-320-80.jpg" alt="Fortnite" class="game-img">
+                <div class="game-content">
+                    <h3 class="game-title">Fortnite</h3>
+                    <p class="game-price">Mulai dari $7.99</p>
+                </div>
+            </a>
+            <a href="league-of-legends.html" class="game-card">
+                <img src="https://cdn.mos.cms.futurecdn.net/3K3K3K3K3K3K3K3K3K3K3K-320-80.jpg" alt="League of Legends" class="game-img">
+                <div class="game-content">
+                    <h3 class="game-title">League of Legends</h3>
+                    <p class="game-price">Mulai dari $4.99</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">💎 Toko Diamond</div>
+                <p class="footer-description">Toko serba ada untuk mata uang game, diamond, dan voucher dengan harga terbaik. Cepat, aman, dan terpercaya.</p>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Tautan Cepat</h3>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="index.html">Beranda</a></li>
+                    <li class="footer-link"><a href="games.html">Game</a></li>
+                    <li class="footer-link"><a href="topup.html">Isi Ulang</a></li>
+                    <li class="footer-link"><a href="vouchers.html">Voucher</a></li>
+                    <li class="footer-link"><a href="about.html">Tentang Kami</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Dukungan</h3>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="faq.html">FAQ</a></li>
+                    <li class="footer-link"><a href="how-to-topup.html">Cara Isi Ulang</a></li>
+                    <li class="footer-link"><a href="contact.html">Kontak Kami</a></li>
+                    <li class="footer-link"><a href="terms.html">Syarat Layanan</a></li>
+                    <li class="footer-link"><a href="privacy.html">Kebijakan Privasi</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 class="footer-title">Kontak Kami</h3>
+                <div class="footer-contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span><a href="mailto:dukungan@tokodiamond.com">dukungan@tokodiamond.com</a></span>
+                </div>
+                <div class="footer-contact-item">
+                    <span class="contact-icon">📱</span>
+                    <span>+62 123 456 7890</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Toko Diamond. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        function toggleSearch() {
+            const searchContainer = document.querySelector('.search-input-container');
+            searchContainer.classList.toggle('active');
+        }
+
+        function searchGame() {
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const games = [
+                { name: 'mobile legends', url: 'mobile-legends.html' },
+                { name: 'free fire', url: 'free-fire.html' },
+                { name: 'pubg mobile', url: 'pubg-mobile.html' },
+                { name: 'genshin impact', url: 'genshin-impact.html' },
+                { name: 'call of duty mobile', url: 'cod-mobile.html' },
+                { name: 'valorant', url: 'valorant.html' },
+                { name: 'fortnite', url: 'fortnite.html' },
+                { name: 'league of legends', url: 'league-of-legends.html' }
+            ];
+
+            const foundGame = games.find(game => game.name.includes(searchValue));
+            if (foundGame) {
+                window.location.href = foundGame.url;
+            } else {
+                alert('Game tidak ditemukan! Coba kata kunci lain.');
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchGame();
+            }
+        });
+    </script>
+</body>
+</html>
