@@ -167,7 +167,7 @@
             box-shadow: 0 0 15px rgba(255, 175, 123, 0.5);
             transform: translateY(-2px);
         }
-
+        
         /* Hero Section */
         .hero {
             height: 60vh;
@@ -552,33 +552,34 @@
                 padding: 0;
             }
 
-            /* Navbar menjadi popup di bawah header */
+            /* Navbar menjadi popup dengan sudut melengkung */
             .nav-menu {
                 display: none;
-                position: fixed;
-                top: 60px; /* Sesuai tinggi header */
-                left: 0;
-                width: 100%;
+                position: absolute;
+                top: 100%; /* Tepat di bawah header */
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%; /* Tidak penuh agar ada ruang di sisi */
+                max-width: 400px; /* Lebar maksimum agar tidak terlalu lebar */
                 background: linear-gradient(135deg, #3a1c71, #d76d77);
                 padding: 1rem 0;
+                border-radius: 20px; /* Sudut melengkung besar untuk kesan lembut */
                 box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
                 flex-direction: column;
                 align-items: center;
                 opacity: 0;
-                transform: translateY(-20px);
-                transition: opacity 0.3s ease, transform 0.3s ease;
+                transition: opacity 0.3s ease; /* Hanya opacity untuk kesan lembut */
                 z-index: 99;
             }
 
             .nav-menu.active {
                 display: flex;
                 opacity: 1;
-                transform: translateY(0);
             }
 
-            /* Hapus efek dan logo/nama di dalam navbar */
+            /* Kolom dalam navbar tanpa efek */
             .nav-item {
-                margin: 0.5rem 0; /* Jarak antar item lebih sederhana */
+                margin: 0.5rem 0;
                 text-align: center;
             }
 
@@ -586,15 +587,15 @@
                 color: #fff;
                 font-size: 1.1rem;
                 padding: 0.5rem 1rem;
-                background: none; /* Hapus latar belakang */
-                box-shadow: none; /* Hapus bayangan */
-                transform: none; /* Hapus transformasi */
-                transition: none; /* Hapus transisi efek */
+                background: none;
+                box-shadow: none;
+                transform: none;
+                transition: none;
             }
 
             .nav-link:hover {
                 color: #ffaf7b;
-                background: none; /* Tetap bersih tanpa efek */
+                background: none;
                 box-shadow: none;
                 transform: none;
             }
@@ -647,7 +648,9 @@
             }
 
             .nav-menu {
-                top: 50px; /* Sesuai tinggi header yang lebih kecil */
+                top: 100%; /* Sesuai tinggi header yang lebih kecil */
+                width: 85%; /* Sedikit lebih sempit untuk kesan lembut */
+                border-radius: 15px; /* Sudut lebih kecil di layar kecil */
             }
 
             .nav-link {
