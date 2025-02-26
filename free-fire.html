@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Diamond - Free Fire</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+            padding: 1rem 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: glow 2s infinite alternate;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .search-toggle {
+            font-size: 1.5rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .search-toggle:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        .search-input-container {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .search-input-container.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .search-input {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px 0 0 20px;
+            font-size: 1rem;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            width: 150px;
+        }
+
+        .search-input:focus {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(255, 111, 97, 0.5);
+        }
+
+        .search-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0 20px 20px 0;
+            background: #ff6f61;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #d76d77;
+            box-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
+        }
+
+        .hamburger {
+            font-size: 1.8rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.4s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffaf7b;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(255, 175, 123, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Konten Game */
+        .game-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ffaf7b;
+            text-shadow: 0 0 10px rgba(255, 175, 123, 0.7);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6f61, #d76d77);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            font-size: 1.2rem;
+            color: #ffaf7b;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-shadow: 0 0 5px rgba(255, 175, 123, 0.5);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            background: #2a2a42;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255, 111, 97, 0.5);
+        }
+
+        .diamond-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .diamond-card {
+            background: #2a2a42;
+            padding: 1rem;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .diamond-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(255, 111, 97, 0.8);
+        }
+
+        .diamond-card.active {
+            background: rgba(255, 111, 97, 0.3);
+        }
+
+        .diamond-title {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .diamond-price {
+            font-size: 1rem;
+            color: #ff6f61;
+            font-weight: 700;
+        }
+
+        .payment-methods {
+            background: #2a2a42;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .payment-tab {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #ff6f61;
+        }
+
+        .payment-tab button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-tab button.active {
+            color: #ffaf7b;
+            border-bottom: 2px solid #ffaf7b;
+        }
+
+        .payment-tab button:hover {
+            color: #ffaf7b;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+        }
+
+        .payment-card {
+            background: #1e1e36;
+            padding: 0.5rem;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(255, 111, 97, 0.8);
+        }
+
+        .payment-card.active {
+            background: rgba(255, 111, 97, 0.3);
+        }
+
+        .payment-card img {
+            max-height: 30px;
+            width: auto;
+        }
+
+        .btn-confirm {
+            background: linear-gradient(135deg, #ff6f61, #d76d77);
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .btn-confirm:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
+        }
+
+        .spinner-border {
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 0.25em solid #fff;
+            border-right-color: transparent;
+        }
+
+        /* Media Query untuk Mobile */
+        @media (max-width: 768px) {
+            header {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-container {
+                gap: 0.5rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+                margin-right: 0;
+                order: 1;
+            }
+
+            .logo-icon {
+                font-size: 1.8rem;
+                margin-right: 10px;
+            }
+
+            .search-container {
+                order: 2;
+                margin-right: 0.2rem;
+                margin-left: auto;
+            }
+
+            .search-toggle {
+                font-size: 1.3rem;
+                padding: 0;
+            }
+
+            .search-input-container {
+                position: fixed;
+                top: 60px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80%;
+                max-width: 300px;
+            }
+
+            .hamburger {
+                font-size: 1.6rem;
+                margin-left: 0.2rem;
+                order: 3;
+                padding: 0;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                max-width: 400px;
+                background: linear-gradient(135deg, #3a1c71, #d76d77);
+                padding: 1rem 0;
+                border-radius: 20px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+                flex-direction: column;
+                align-items: center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                z-index: 99;
+            }
+
+            .nav-menu.active {
+                display: flex;
+                opacity: 1;
+            }
+
+            .nav-item {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+
+            .nav-link {
+                font-size: 1.1rem;
+                padding: 0.5rem 1rem;
+                background: none;
+                box-shadow: none;
+                transform: none;
+                transition: none;
+            }
+
+            .nav-link:hover {
+                color: #ffaf7b;
+                background: none;
+                box-shadow: none;
+                transform: none;
+            }
+
+            .game-section {
+                padding: 3rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .diamond-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+
+            .diamond-title {
+                font-size: 1rem;
+            }
+
+            .diamond-price {
+                font-size: 0.9rem;
+            }
+
+            .payment-tab {
+                flex-wrap: wrap;
+            }
+
+            .payment-tab button {
+                font-size: 1rem;
+                padding: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .logo-icon {
+                font-size: 1.5rem;
+                margin-right: 8px;
+            }
+
+            .search-container {
+                margin-right: 0.1rem;
+            }
+
+            .search-toggle {
+                font-size: 1.2rem;
+            }
+
+            .hamburger {
+                font-size: 1.5rem;
+                margin-left: 0.1rem;
+            }
+
+            .nav-menu {
+                width: 85%;
+                border-radius: 15px;
+            }
+
+            .nav-link {
+                font-size: 1rem;
+                padding: 0.5rem;
+            }
+
+            .diamond-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+        }
+
+        /* Animasi */
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(255, 111, 97, 0.5); }
+            to { box-shadow: 0 0 20px rgba(255, 111, 97, 0.8); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">💎</span>Toko Diamond
+            </a>
+            <div class="search-container">
+                <button class="search-toggle" onclick="toggleSearch()">🔍</button>
+                <div class="search-input-container">
+                    <input type="text" class="search-input" placeholder="Cari game..." id="searchInput">
+                    <button class="search-btn" onclick="searchGame()">Cari</button>
+                </div>
+            </div>
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Beranda</a></li>
+                <li class="nav-item"><a href="games.html" class="nav-link">Game</a></li>
+                <li class="nav-item"><a href="topup.html" class="nav-link">Isi Ulang</a></li>
+                <li class="nav-item"><a href="vouchers.html" class="nav-link">Voucher</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Kontak</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Konten Game -->
+    <section class="game-section">
+        <h2 class="section-title">Free Fire Top Up</h2>
+
+        <!-- Input Player ID -->
+        <div class="form-group">
+            <label class="form-label">Masukkan Player ID</label>
+            <input type="tel" class="form-input" id="userId" placeholder="Masukkan Player ID (contoh: 12345678)">
+            <small style="color: #b0b0b0; font-size: 0.8rem;">Untuk mengetahui User ID Anda, silakan klik menu profile di bagian kiri atas pada menu utama game.</small>
+        </div>
+
+        <!-- Pilih Nominal Top Up -->
+        <div class="form-group">
+            <label class="form-label">Pilih Nominal Top Up</label>
+            <div class="diamond-grid">
+                <div class="diamond-card" data-price="1000" data-name="5 Diamonds">
+                    <h3 class="diamond-title">5 Diamonds</h3>
+                    <p class="diamond-price">Rp 1.000</p>
+                </div>
+                <div class="diamond-card" data-price="3000" data-name="12 Diamonds">
+                    <h3 class="diamond-title">12 Diamonds</h3>
+                    <p class="diamond-price">Rp 3.000</p>
+                </div>
+                <div class="diamond-card" data-price="28000" data-name="Member Mingguan">
+                    <h3 class="diamond-title">Member Mingguan</h3>
+                    <p class="diamond-price">Rp 28.000</p>
+                </div>
+                <div class="diamond-card" data-price="85000" data-name="Member Bulanan">
+                    <h3 class="diamond-title">Member Bulanan</h3>
+                    <p class="diamond-price">Rp 85.000</p>
+                </div>
+                <!-- Tambahkan lebih banyak opsi sesuai kebutuhan -->
+            </div>
+        </div>
+
+        <!-- Pilih Pembayaran -->
+        <div class="form-group">
+            <label class="form-label">Pilih Pembayaran</label>
+            <div class="payment-methods">
+                <div class="payment-tab">
+                    <button class="tab-btn active" data-tab="ewallet">E-Wallet</button>
+                    <button class="tab-btn" data-tab="pulsa">Pulsa</button>
+                    <button class="tab-btn" data-tab="bank">Bank</button>
+                </div>
+                <div class="payment-content" id="ewallet">
+                    <div class="payment-grid">
+                        <div class="payment-card" data-name="DANA">
+                            <img src="https://static-src.vocagame.com/vocagame/payment/DANA-a73e.webp" alt="DANA">
+                        </div>
+                        <div class="payment-card" data-name="OVO">
+                            <img src="https://static-src.vocagame.com/vocagame/payment/OVO-aca8.webp" alt="OVO">
+                        </div>
+                        <!-- Tambahkan lebih banyak opsi -->
+                    </div>
+                </div>
+                <div class="payment-content" id="pulsa" style="display: none;">
+                    <div class="payment-grid">
+                        <div class="payment-card" data-name="Telkomsel">
+                            <img src="https://static-src.vocagame.com/vocagame/payment/Telkomsel-76c5.webp" alt="Telkomsel">
+                        </div>
+                        <div class="payment-card" data-name="XL">
+                            <img src="https://static-src.vocagame.com/vocagame/payment/XL-ea73.webp" alt="XL">
+                        </div>
+                        <!-- Tambahkan lebih banyak opsi -->
+                    </div>
+                </div>
+                <div class="payment-content" id="bank" style="display: none;">
+                    <div class="payment-grid">
+                        <div class="payment-card" data-name="BCA">
+                            <img src="https://static-src.vocagame.com/vocagame/payment/BCA-81db.webp" alt="BCA">
+                        </div>
+                        <div class="payment-card" data-name="BRI">
+                            <img src="https://static-src.vocagame.com/vocagame/payment/BRI-0cea.webp" alt="BRI">
+                        </div>
+                        <!-- Tambahkan lebih banyak opsi -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tombol Beli -->
+        <button id="confirm" class="btn-confirm">
+            <span>Konfirmasi Top Up</span>
+            <div id="loading" class="spinner-border" style="display: none;"></div>
+        </button>
+    </section>
+
+    <!-- Modal Konfirmasi (contoh sederhana) -->
+    <div class="modal fade" id="confrimModal" tabindex="-1" aria-labelledby="confrimModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background: #2a2a42; color: #fff; border-radius: 15px;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confrimModalLabel">Konfirmasi Pesanan</h5>
+                    <button type="button" class="btn-close" style="filter: invert(1);" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table style="width: 100%; color: #e0e0e0;">
+                        <tr><td>Player ID</td><td>: </td><td id="info2"></td></tr>
+                        <tr><td>Nominal</td><td>: </td><td id="info4"></td></tr>
+                        <tr><td>Harga</td><td>: </td><td id="info5"></td></tr>
+                        <tr><td>Pembayaran</td><td>: </td><td id="info6"></td></tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-confirm" id="send">Beli Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        function toggleSearch() {
+            const searchContainer = document.querySelector('.search-input-container');
+            searchContainer.classList.toggle('active');
+        }
+
+        function searchGame() {
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const games = [
+                { name: 'mobile legends', url: 'mobile-legends.html' },
+                { name: 'free fire', url: 'free-fire.html' }
+            ];
+            const foundGame = games.find(game => game.name.includes(searchValue));
+            if (foundGame) {
+                window.location.href = foundGame.url;
+            } else {
+                alert('Game tidak ditemukan! Coba kata kunci lain.');
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchGame();
+            }
+        });
+
+        // Logika untuk Pilih Nominal dan Pembayaran
+        document.querySelectorAll('.diamond-card').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.diamond-card').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.payment-content').forEach(el => el.style.display = 'none');
+                this.classList.add('active');
+                document.getElementById(this.getAttribute('data-tab')).style.display = 'block';
+            });
+        });
+
+        document.querySelectorAll('.payment-card').forEach(item => {
+            item.addEventListener('click', function() {
+                if (document.querySelector('.diamond-card.active')) {
+                    document.querySelectorAll('.payment-card').forEach(el => el.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        document.getElementById('confirm').addEventListener('click', function() {
+            if (document.querySelector('.diamond-card.active') && document.querySelector('.payment-card.active') && 
+                document.getElementById('userId').value) {
+                document.getElementById('loading').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('info2').textContent = document.getElementById('userId').value;
+                    document.getElementById('info4').textContent = document.querySelector('.diamond-card.active').getAttribute('data-name');
+                    document.getElementById('info5').textContent = `Rp ${parseInt(document.querySelector('.diamond-card.active').getAttribute('data-price')).toLocaleString('id-ID')}`;
+                    document.getElementById('info6').textContent = document.querySelector('.payment-card.active').getAttribute('data-name');
+                    document.getElementById('loading').style.display = 'none';
+                    new bootstrap.Modal(document.getElementById('confrimModal')).show();
+                }, 1000);
+            } else {
+                alert('Lengkapi semua data!');
+            }
+        });
+
+        document.getElementById('send').addEventListener('click', function() {
+            alert('Pesanan Anda sedang diproses!');
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>
