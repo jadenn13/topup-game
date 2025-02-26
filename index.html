@@ -493,25 +493,26 @@
 
             .nav-container {
                 display: flex;
-                justify-content: flex-end; /* Menggeser semua elemen ke kanan */
+                justify-content: space-between; /* Logo di kiri, search dan hamburger di kanan */
                 align-items: center;
-                gap: 0.2rem; /* Jarak antar elemen diperkecil */
+                gap: 0.5rem; /* Jarak antar elemen normal */
             }
 
             .logo {
                 font-size: 1.5rem;
-                margin-right: 0.2rem; /* Jarak kecil ke search */
-                order: 1; /* Logo tetap di kiri dalam grup kanan */
+                margin-right: 0; /* Tidak ada margin kanan ekstra, tetap di kiri */
+                order: 1; /* Logo di urutan pertama (kiri) */
             }
 
             .logo-icon {
                 font-size: 1.8rem;
-                margin-right: 6px; /* Jarak ikon logo ke teks dikurangi */
+                margin-right: 10px; /* Jarak ikon ke teks tetap seperti awal */
             }
 
             .search-container {
-                order: 2; /* Search setelah logo */
+                order: 2; /* Search sebelum hamburger */
                 margin-right: 0.2rem; /* Jarak kecil ke hamburger */
+                margin-left: auto; /* Menggeser search ke kanan */
             }
 
             .search-toggle {
@@ -601,12 +602,12 @@
         @media (max-width: 480px) {
             .logo {
                 font-size: 1.3rem;
-                margin-right: 0.1rem; /* Lebih rapat di layar kecil */
+                margin-right: 0; /* Tetap di kiri tanpa jarak kanan */
             }
 
             .logo-icon {
                 font-size: 1.5rem;
-                margin-right: 4px; /* Lebih kompak */
+                margin-right: 8px; /* Sedikit dikurangi untuk kekompakan */
             }
 
             .search-container {
@@ -621,7 +622,7 @@
                 font-size: 1.5rem;
                 margin-left: 0.1rem; /* Lebih dekat ke search */
             }
-
+            
             .hero-title {
                 font-size: 1.8rem;
             }
