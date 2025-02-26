@@ -244,6 +244,10 @@
             box-shadow: 0 0 30px rgba(255, 111, 97, 0.8);
         }
 
+        .diamond-card.active {
+            background: rgba(255, 111, 97, 0.3);
+        }
+
         .diamond-title {
             font-size: 1.2rem;
             color: #fff;
@@ -256,44 +260,37 @@
             font-weight: 700;
         }
 
-        .accordion {
+        .payment-methods {
+            background: #2a2a42;
+            padding: 1.5rem;
+            border-radius: 15px;
             margin-bottom: 2rem;
         }
 
-        .accordion-item {
-            background: #2a2a42;
+        .payment-tab {
+            display: flex;
+            justify-content: space-around;
             margin-bottom: 1rem;
-            border-radius: 15px;
-            overflow: hidden;
+            border-bottom: 2px solid #ff6f61;
         }
 
-        .accordion-header {
-            background: #2a2a42;
-        }
-
-        .accordion-button {
-            background: #2a2a42;
-            color: #fff;
-            padding: 1rem;
-            width: 100%;
-            text-align: left;
+        .payment-tab button {
+            background: none;
             border: none;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
             cursor: pointer;
-            font-size: 1.2rem;
             transition: all 0.3s ease;
         }
 
-        .accordion-button:hover {
-            background: rgba(255, 111, 97, 0.2);
+        .payment-tab button.active {
+            color: #ffaf7b;
+            border-bottom: 2px solid #ffaf7b;
         }
 
-        .accordion-collapse {
-            background: #2a2a42;
-        }
-
-        .accordion-body {
-            padding: 1rem;
-            background: #1e1e36;
+        .payment-tab button:hover {
+            color: #ffaf7b;
         }
 
         .payment-grid {
@@ -303,7 +300,7 @@
         }
 
         .payment-card {
-            background: #2a2a42;
+            background: #1e1e36;
             padding: 0.5rem;
             text-align: center;
             border-radius: 10px;
@@ -314,6 +311,10 @@
         .payment-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 0 20px rgba(255, 111, 97, 0.8);
+        }
+
+        .payment-card.active {
+            background: rgba(255, 111, 97, 0.3);
         }
 
         .payment-card img {
@@ -462,6 +463,15 @@
             .diamond-price {
                 font-size: 0.9rem;
             }
+
+            .payment-tab {
+                flex-wrap: wrap;
+            }
+
+            .payment-tab button {
+                font-size: 1rem;
+                padding: 0.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -542,48 +552,41 @@
 
     <!-- Konten Game -->
     <section class="game-section">
-        <h2 class="section-title">Mobile Legends Diamond</h2>
+        <h2 class="section-title">Mobile Legends Top Up</h2>
 
-        <!-- Input ID dan Server -->
+        <!-- Input Player ID dan Zone ID -->
         <div class="form-group">
-            <label class="form-label">1. Masukkan Data Akun</label>
+            <label class="form-label">Masukkan Player ID</label>
             <div class="row">
                 <div class="col-8">
-                    <input type="text" class="form-input" id="id" placeholder="Masukkan User ID">
+                    <input type="number" class="form-input" id="userId" placeholder="Masukkan User ID" maxlength="10">
                 </div>
                 <div class="col-4">
-                    <input type="text" class="form-input" id="server" placeholder="Server">
+                    <input type="number" class="form-input" id="zoneId" placeholder="Zone ID" maxlength="5">
                 </div>
             </div>
+            <small style="color: #b0b0b0; font-size: 0.8rem;">Untuk mengetahui User ID dan Zone ID Anda, silakan klik menu profile di bagian kiri atas pada menu utama game.</small>
         </div>
 
-        <!-- Pilih Diamond -->
+        <!-- Pilih Nominal Top Up -->
         <div class="form-group">
-            <label class="form-label">2. Pilih Jumlah Diamond</label>
+            <label class="form-label">Pilih Nominal Top Up</label>
             <div class="diamond-grid">
-                <div class="diamond-card paket" data-price_bank="3000" data-price_cash="3000" data-price_ewallet="3000" data-price_ewallet_manual="3000" data-price_mini="3000" data-price_qb="3000" data-price_pulsa="3000" data-price_cstore="3000" data-price_va="3000" data-id_denom="1" data-name="11 Diamond">
-                    <h3 class="diamond-title">11 Diamond</h3>
+                <div class="diamond-card" data-price="1075" data-name="5 Diamonds">
+                    <h3 class="diamond-title">5 Diamonds</h3>
+                    <p class="diamond-price">Rp 1.075</p>
+                </div>
+                <div class="diamond-card" data-price="3000" data-name="11 Diamonds">
+                    <h3 class="diamond-title">11 Diamonds</h3>
                     <p class="diamond-price">Rp 3.000</p>
                 </div>
-                <div class="diamond-card paket" data-price_bank="5000" data-price_cash="5000" data-price_ewallet="5000" data-price_ewallet_manual="5000" data-price_mini="5000" data-price_qb="5000" data-price_pulsa="5000" data-price_cstore="5000" data-price_va="5000" data-id_denom="2" data-name="17 Diamond">
-                    <h3 class="diamond-title">17 Diamond</h3>
-                    <p class="diamond-price">Rp 5.000</p>
+                <div class="diamond-card" data-price="26000" data-name="Weekly Diamond Pass">
+                    <h3 class="diamond-title">Weekly Diamond Pass</h3>
+                    <p class="diamond-price">Rp 26.000</p>
                 </div>
-                <div class="diamond-card paket" data-price_bank="3000" data-price_cash="3000" data-price_ewallet="3000" data-price_ewallet_manual="3000" data-price_mini="3000" data-price_qb="3000" data-price_pulsa="3000" data-price_cstore="3000" data-price_va="3000" data-id_denom="1" data-name="11 Diamond">
-                    <h3 class="diamond-title">11 Diamond</h3>
-                    <p class="diamond-price">Rp 3.000</p>
-                </div>
-                <div class="diamond-card paket" data-price_bank="5000" data-price_cash="5000" data-price_ewallet="5000" data-price_ewallet_manual="5000" data-price_mini="5000" data-price_qb="5000" data-price_pulsa="5000" data-price_cstore="5000" data-price_va="5000" data-id_denom="2" data-name="17 Diamond">
-                    <h3 class="diamond-title">17 Diamond</h3>
-                    <p class="diamond-price">Rp 5.000</p>
-                </div>
-                <div class="diamond-card paket" data-price_bank="3000" data-price_cash="3000" data-price_ewallet="3000" data-price_ewallet_manual="3000" data-price_mini="3000" data-price_qb="3000" data-price_pulsa="3000" data-price_cstore="3000" data-price_va="3000" data-id_denom="1" data-name="11 Diamond">
-                    <h3 class="diamond-title">11 Diamond</h3>
-                    <p class="diamond-price">Rp 3.000</p>
-                </div>
-                <div class="diamond-card paket" data-price_bank="5000" data-price_cash="5000" data-price_ewallet="5000" data-price_ewallet_manual="5000" data-price_mini="5000" data-price_qb="5000" data-price_pulsa="5000" data-price_cstore="5000" data-price_va="5000" data-id_denom="2" data-name="17 Diamond">
-                    <h3 class="diamond-title">17 Diamond</h3>
-                    <p class="diamond-price">Rp 5.000</p>
+                <div class="diamond-card" data-price="75000" data-name="Twilight Pass">
+                    <h3 class="diamond-title">Twilight Pass</h3>
+                    <p class="diamond-price">Rp 75.000</p>
                 </div>
                 <!-- Tambahkan lebih banyak opsi sesuai kebutuhan -->
             </div>
@@ -591,76 +594,68 @@
 
         <!-- Pilih Pembayaran -->
         <div class="form-group">
-            <label class="form-label">3. Pilih Metode Pembayaran</label>
-            <div class="accordion">
-                <!-- E-Wallet -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#ewalletCollapse">E-Wallet</button>
-                    </h2>
-                    <div id="ewalletCollapse" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                            <div class="payment-grid">
-                                <div class="payment-card payment_ewallet" data-adjs="0" data-info="ZEE/PUTRI/MIRA" data-name="OVO" data-payment="11">
-                                    <img src="https://zeeshopgaming.com/img/payment/e-ovo.png" alt="OVO">
-                                </div>
-                                <div class="payment-card payment_ewallet" data-adjs="0" data-info="ZEE/PUTRI/MIRA" data-name="DANA" data-payment="12">
-                                    <img src="https://zeeshopgaming.com/img/payment/e-dana.png" alt="DANA">
-                                </div>
-                                <!-- Tambahkan lebih banyak opsi -->
-                            </div>
+            <label class="form-label">Pilih Pembayaran</label>
+            <div class="payment-methods">
+                <div class="payment-tab">
+                    <button class="tab-btn active" data-tab="ewallet">E-Wallet</button>
+                    <button class="tab-btn" data-tab="pulsa">Pulsa</button>
+                    <button class="tab-btn" data-tab="bank">Bank</button>
+                </div>
+                <div class="payment-content" id="ewallet">
+                    <div class="payment-grid">
+                        <div class="payment-card" data-name="DANA">
+                            <img src="https://static-src.vocagame.com/vocagame/payment/DANA-a73e.webp" alt="DANA">
                         </div>
+                        <div class="payment-card" data-name="OVO">
+                            <img src="https://static-src.vocagame.com/vocagame/payment/OVO-aca8.webp" alt="OVO">
+                        </div>
+                        <!-- Tambahkan lebih banyak opsi -->
                     </div>
                 </div>
-
-                <!-- Pulsa -->
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#pulsaCollapse">Pulsa (Manual)</button>
-                    </h2>
-                    <div id="pulsaCollapse" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                            <div class="payment-grid">
-                                <div class="payment-card payment_pulsa" data-adjs="0" data-info="081234848054" data-name="TELKOMSEL" data-payment="101">
-                                    <img src="https://zeeshopgaming.com/img/payment/p-telkomsel.png" alt="TELKOMSEL">
-                                </div>
-                                <div class="payment-card payment_pulsa" data-adjs="0" data-info="085939255975" data-name="XL" data-payment="102">
-                                    <img src="https://zeeshopgaming.com/img/payment/p-xl.png" alt="XL">
-                                </div>
-                                <!-- Tambahkan lebih banyak opsi -->
-                            </div>
+                <div class="payment-content" id="pulsa" style="display: none;">
+                    <div class="payment-grid">
+                        <div class="payment-card" data-name="Telkomsel">
+                            <img src="https://static-src.vocagame.com/vocagame/payment/Telkomsel-76c5.webp" alt="Telkomsel">
                         </div>
+                        <div class="payment-card" data-name="XL">
+                            <img src="https://static-src.vocagame.com/vocagame/payment/XL-ea73.webp" alt="XL">
+                        </div>
+                        <!-- Tambahkan lebih banyak opsi -->
+                    </div>
+                </div>
+                <div class="payment-content" id="bank" style="display: none;">
+                    <div class="payment-grid">
+                        <div class="payment-card" data-name="BCA">
+                            <img src="https://static-src.vocagame.com/vocagame/payment/BCA-81db.webp" alt="BCA">
+                        </div>
+                        <div class="payment-card" data-name="BRI">
+                            <img src="https://static-src.vocagame.com/vocagame/payment/BRI-0cea.webp" alt="BRI">
+                        </div>
+                        <!-- Tambahkan lebih banyak opsi -->
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Nomor WhatsApp -->
-        <div class="form-group">
-            <label class="form-label">4. Masukkan Nomor Whatsapp</label>
-            <input type="number" class="form-input" id="nomor_hp" placeholder="0816156xxxxx">
-            <small style="color: #b0b0b0; font-size: 0.8rem;">Tidak ada notifikasi pesanan, hanya kami hubungi jika ada kendala</small>
-        </div>
-
-        <!-- Tombol Lanjutkan -->
+        <!-- Tombol Beli -->
         <button id="confirm" class="btn-confirm">
-            <span>Lanjutkan</span>
+            <span>Beli Sekarang</span>
             <div id="loading" class="spinner-border" style="display: none;"></div>
         </button>
     </section>
 
-    <!-- Modal Konfirmasi (contoh sederhana) -->
+    <!-- Modal Konfirmasi -->
     <div class="modal fade" id="confrimModal" tabindex="-1" aria-labelledby="confrimModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" style="background: #2a2a42; color: #fff; border-radius: 15px;">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="confrimModalLabel">Silahkan Cek Data Pesanan</h5>
+                    <h5 class="modal-title" id="confrimModalLabel">Konfirmasi Pesanan</h5>
                     <button type="button" class="btn-close" style="filter: invert(1);" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <table style="width: 100%; color: #e0e0e0;">
-                        <tr><td>ID(Server)</td><td>: </td><td id="info2"></td></tr>
-                        <tr><td>Order</td><td>: </td><td id="info4"></td></tr>
+                        <tr><td>User ID (Zone ID)</td><td>: </td><td id="info2"></td></tr>
+                        <tr><td>Nominal</td><td>: </td><td id="info4"></td></tr>
                         <tr><td>Harga</td><td>: </td><td id="info5"></td></tr>
                         <tr><td>Pembayaran</td><td>: </td><td id="info6"></td></tr>
                     </table>
@@ -706,37 +701,42 @@
             }
         });
 
-        // Logika untuk Pilih Diamond dan Pembayaran
-        document.querySelectorAll('.paket').forEach(item => {
+        // Logika untuk Pilih Nominal dan Pembayaran
+        document.querySelectorAll('.diamond-card').forEach(item => {
             item.addEventListener('click', function() {
-                document.querySelectorAll('.paket').forEach(el => el.classList.remove('bg-light-purple', 'paket-active'));
-                this.classList.add('bg-light-purple', 'paket-active');
-                const price = this.getAttribute('data-price_bank');
-                document.querySelectorAll('.diamond-price').forEach(el => {
-                    el.textContent = `Rp ${parseInt(price).toLocaleString('id-ID')}`;
-                });
+                document.querySelectorAll('.diamond-card').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.payment-content').forEach(el => el.style.display = 'none');
+                this.classList.add('active');
+                document.getElementById(this.getAttribute('data-tab')).style.display = 'block';
             });
         });
 
         document.querySelectorAll('.payment-card').forEach(item => {
             item.addEventListener('click', function() {
-                if (document.querySelector('.paket-active')) {
-                    document.querySelectorAll('.payment-card').forEach(el => el.classList.remove('bg-light-purple', 'payment-active'));
-                    this.classList.add('bg-light-purple', 'payment-active');
+                if (document.querySelector('.diamond-card.active')) {
+                    document.querySelectorAll('.payment-card').forEach(el => el.classList.remove('active'));
+                    this.classList.add('active');
                 }
             });
         });
 
         document.getElementById('confirm').addEventListener('click', function() {
-            if (document.querySelector('.paket-active') && document.querySelector('.payment-active') && 
-                document.getElementById('id').value && document.getElementById('server').value && 
-                document.getElementById('nomor_hp').value) {
+            const selectedItem = document.querySelector('.diamond-card.active');
+            if (selectedItem && document.querySelector('.payment-card.active') && 
+                document.getElementById('userId').value && document.getElementById('zoneId').value) {
                 document.getElementById('loading').style.display = 'block';
                 setTimeout(() => {
-                    document.getElementById('info2').textContent = `${document.getElementById('id').value} S: ${document.getElementById('server').value}`;
-                    document.getElementById('info4').textContent = document.querySelector('.paket-active').getAttribute('data-name');
-                    document.getElementById('info5').textContent = `Rp ${parseInt(document.querySelector('.paket-active').getAttribute('data-price_bank')).toLocaleString('id-ID')}`;
-                    document.getElementById('info6').textContent = document.querySelector('.payment-active').getAttribute('data-name');
+                    document.getElementById('info2').textContent = `${document.getElementById('userId').value} (${document.getElementById('zoneId').value})`;
+                    document.getElementById('info4').textContent = selectedItem.getAttribute('data-name');
+                    document.getElementById('info5').textContent = `Rp ${parseInt(selectedItem.getAttribute('data-price')).toLocaleString('id-ID')}`;
+                    document.getElementById('info6').textContent = document.querySelector('.payment-card.active').getAttribute('data-name');
                     document.getElementById('loading').style.display = 'none';
                     new bootstrap.Modal(document.getElementById('confrimModal')).show();
                 }, 1000);
